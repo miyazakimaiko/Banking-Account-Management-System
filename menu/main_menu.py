@@ -1,4 +1,6 @@
 from .utils import Utils
+from data.accounts_converter import AccountsConverter
+from data.customers_converter import CustomersConverter
 
 class MainMenu():
 
@@ -18,16 +20,21 @@ class MainMenu():
 
         elif selection == 3:
             from .lodgement_menu import LodgementMenu
-            LodgementMenu().main()
+            LodgementMenu().main(customers)
 
         elif selection == 4:
             from .transfer_menu import TransferMenu
-            TransferMenu().main()
+            TransferMenu().main(customers)
 
         elif selection == 5:
             Utils().clear_screen()
-            print('Exiting...')
+            AccountsConverter().format_csv(customers)
+            CustomersConverter().format_csv(customers)
+            print('Changes have saved successfully.')
+            print()
+            return
 
+        print()
         input('Press Enter to go back to Menu...')
         self.main(customers)
 
