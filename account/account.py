@@ -14,6 +14,17 @@ class Account():
     def iterest_rate(self):
         return self._interest_rate
 
+    def is_transferrable(self, amount):
+        if amount <= self._balance:
+            return True
+        return False
+
+    def send(self, amount):
+        self._balance = self._balance - amount
+
+    def receive(self, amount):
+        self._balance = self._balance + amount
+
     def lodge(self, amount):
         self._balance = self._balance + amount
 
@@ -27,11 +38,19 @@ class Current(Account):
     def overdraft(self):
         return self._overdraft
 
-    def withdraw(self, amount):
-        if amount < self._balance or self._overdraft is True:
-            self._balance = self._balance - amount
+    def is_transferrable(self, amount):
+        if amount <= self._balance or self._overdraft is True:
             return True
         return False
+
+    def is_withdrawable(self, amount):
+        if amount <= self._balance or self._overdraft is True:
+            return True
+        return False
+
+    def withdraw(self, amount):
+        if amount <= self._balance or self._overdraft is True:
+            self._balance = self._balance - amount
 
     def __repr__(self):
         return f"type: current, balance: {self.balance}, interest_rate: {self._interest_rate}, overdtaft: {self.overdraft}"
