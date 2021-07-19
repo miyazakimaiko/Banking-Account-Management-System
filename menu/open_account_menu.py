@@ -10,12 +10,12 @@ class OpenAccountMenu():
         print()
 
         ppsn = self.get_ppsn_via_input()
-        customer = self.get_customer(ppsn, customers)
+        customer = customers.get_customer_by_ppsn(ppsn)
 
         if not customer:
             from .create_customer_menu import CreateCustomerMenu
             CreateCustomerMenu().main(customers, ppsn)
-            customer = self.get_customer(ppsn, customers)
+            customer = customers.get_customer_by_ppsn(ppsn)
 
         Utils().clear_screen()
 
@@ -34,33 +34,25 @@ class OpenAccountMenu():
         return ppsn
 
 
-    def get_customer(self, ppsn, customers):
-        return customers.get_customer_by_ppsn(ppsn)  
-
-
     def create_account(self, customer):
         account_type = self.get_account_type_via_input()
         Utils().clear_screen()
         print()
 
         if account_type == 1:
-            print("create current account")
-            print()
             balance = self.get_initial_balance_via_input(account_type)
             overdraft = self.get_overdraft_bool_via_input()
             account = Current(balance, overdraft)
             customer.add_account(account)
 
         elif account_type == 2:
-            print("create deposit account")
-            print()
             balance = self.get_initial_balance_via_input(account_type)
             account = Deposit(balance)
             customer.add_account(account)
 
         Utils().clear_screen()
         print()
-        print("New account is opened for ", customer.first_name, customer.last_name)
+        print("✅ New account is opened for ", customer.first_name, customer.last_name)
         print()
         print(" ".ljust(30), "Accounts")
         print("-"*75)
@@ -104,9 +96,9 @@ class OpenAccountMenu():
         amount = input('Enter initial balance to lodge: ')
 
         try:
-            amount = int(amount)
+            amount = float(amount)
         except:
-            print('🚫 Wrong format. Please enter a digit.')
+            print('🚫 Wrong format. Please enter a number.')
             amount = self.get_initial_balance_via_input(account_type)
 
         # when account_type is current..
