@@ -38,7 +38,7 @@ class TransferMenu():
         if not customer:
             print("🚫 Customer does not exist.")
             print()
-            
+
         else:
             print()
             print("____Customer Detail____")
@@ -76,6 +76,7 @@ class TransferMenu():
 
         if amount < 5 or amount > 250000:
             print('🚫 The minimum of ¢5 to the maximum of ¢250,000 can be transferred at once.')
+            amount = self.get_transferrable_amount_via_input(account)
 
         elif not account.is_transferrable(amount):
             print('🚫 The amount entered is not transferrable from the sender. Please enter different amount.')
