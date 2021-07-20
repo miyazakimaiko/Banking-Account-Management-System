@@ -55,3 +55,5 @@ class CustomersConverter():
                 data.append(customer.last_name)
                 data.append(customer.ppsn)
                 writer.writerow(data)
+
+            csv_file.close()

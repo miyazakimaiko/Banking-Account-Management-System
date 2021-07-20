@@ -85,3 +85,5 @@ class AccountsConverter():
                     data.append(balance)
                     data.append(overdraft)
                     writer.writerow(data)
+
+            csv_file.close()
