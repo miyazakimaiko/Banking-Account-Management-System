@@ -27,6 +27,14 @@ class MainMenu():
             TransferMenu().main(customers)
 
         elif selection == 5:
+            from .view_accounts_menu import ViewAccountsMenu
+            ViewAccountsMenu().main(customers)
+
+        elif selection == 6:
+            Utils().clear_screen()
+            self.display_onscreen_help()
+
+        elif selection == 7:
             Utils().clear_screen()
             AccountsConverter().format_csv(customers)
             CustomersConverter().format_csv(customers)
@@ -49,12 +57,14 @@ class MainMenu():
         print("2. Withdrawal")
         print("3. Lodgement")
         print("4. Transfer")
-        print("5. Close")
+        print("5. View accounts")
+        print("6. Onscreen help")
+        print("7. Close")
         print()
 
 
     def get_selection_via_input(self):
-        selection = input('Please enter a number (1 - 5): ')
+        selection = input('Please enter a number (1 - 7): ')
 
         try:
             selection = int(selection)
@@ -62,8 +72,35 @@ class MainMenu():
             print('🚫 Wrong format. Please enter a digit.')
             selection = self.get_selection_via_input()
 
-        if selection > 5 or selection < 1:
-            print('🚫 Selection out of range. Please enter a digit between 1 and 5.')
+        if selection > 7 or selection < 1:
+            print('🚫 Selection out of range. Please enter a digit between 1 and 7.')
             selection = self.get_selection_via_input()
 
         return selection
+
+
+    def display_onscreen_help(self):
+        print()
+        print("Onscreen help")
+        print()
+        print("Selection 1: Open New Account")
+        print("This menu allows you to open an account for existing customer, or navigate through to")
+        print("register customer first if they do not exist on the system.")
+        print()
+        print("Selection 2: Withdrawal")
+        print("This menu allows you to withdraw required amount from a Current account.")
+        print()
+        print("Selection 3: Lodgement")
+        print("This menu allows you to lodge required amount to either Current or Deposit account.")
+        print()
+        print("Selection 4: Transfer")
+        print("This menu allows you to transfer required amount from one account to another.")
+        print()
+        print("Selection 5: View Accounts")
+        print("This menu allows you to view all accounts, or accounts of a specified customer.")
+        print()
+        print("Selection 7: Close")
+        print("This selection allows you to save all the changes made on the session and close the ")
+        print("system safely.")
+        print()
+        print("If you need any assistance, please call 0834837641.")
