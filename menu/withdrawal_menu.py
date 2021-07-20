@@ -29,14 +29,16 @@ class WithdrawalMenu():
                 print("Account type: Current")
                 print()
                 amount = self.get_withdrawable_amount_via_input(account)
-                account.withdraw(amount)
+                withdrawn = account.withdraw(amount)
 
-                print()
-                print("Withdrawal successful")
-                print()
-                print("Withdrawn: ¢", amount)
-                print("Balance: ¢", account.balance)
-                print()
+                if withdrawn:
+                    print()
+                    print("Withdrawal successful")
+                    print()
+                    print("Withdrawn: ¢", amount)
+                    print("Balance: ¢", account.balance)
+                    print("Interest rate: ", account.iterest_rate)
+                    print()
                     
 
             elif isinstance(account, Deposit):
@@ -70,13 +72,14 @@ class WithdrawalMenu():
 
         try:
             amount = round(float(amount), 2)
-            
+
         except:
-            print('🚫 Wrong format. Please enter a digit.')
+            print('🚫 Wrong format. Please enter a digit and exclude comma.')
             amount = self.get_withdrawable_amount_via_input(account)
 
         if amount < 5 or amount > 20000:
             print('🚫 The minimum of ¢5 to the maximum of ¢20,000 can be withdrawn at once.')
+            amount = self.get_withdrawable_amount_via_input(account)
 
         elif not account.is_withdrawable(amount):
             print('🚫 The amount entered is not withdwawable. Please enter different amount.')
