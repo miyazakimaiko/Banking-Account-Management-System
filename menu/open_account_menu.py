@@ -81,7 +81,7 @@ class OpenAccountMenu():
 
         if choice not in ['Y', 'y', 'N', 'n']:
             print('🚫 Wrong format. Please enter Y or N.')
-            choice = self.get_overdraft_choice_via_input()
+            choice = self.get_overdraft_bool_via_input()
 
         elif choice in ['Y', 'y']:
             choice = True
