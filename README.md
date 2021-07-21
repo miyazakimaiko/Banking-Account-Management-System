@@ -71,3 +71,7 @@ The system shall…
 - Exit and close the program safely
 - Save customer data and account data in csv files.
 
+## Class Diagram
+
+<img src="class_diagram.drawio.png"/>
+
